@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conversor de Documentos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Conversor de Documentos</h1>
+  </header>
+
+  <main>
+    <section>
+      <form onsubmit="return false;" aria-label="Conversor de documentos">
+        <label for="file-input">Selecione um arquivo:</label>
+        <input 
+          type="file" 
+          id="file-input" 
+          name="file" 
+          accept=".docx,.pdf,.txt,.pptx,.xlsx" 
+          required 
+          aria-required="true" 
+        />
+        <button type="button" id="convertBtn">Converter</button>
+      </form>
+
+      <div id="result" aria-live="polite" role="status"></div>
+    </section>
+  </main>
+
+  <script src="public/js/script.js"></script>
+</body>
+</html>
