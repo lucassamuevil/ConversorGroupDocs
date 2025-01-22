@@ -1,8 +1,7 @@
 const resultDiv = document.getElementById('result');
 const convertBtn = document.getElementById('convertBtn');
 const fileInput = document.getElementById('file-input');
-const API_URL = 'https://conversorgroupdocs.onrender.com/upload';
-
+const API_URL = 'https://conversorgroupdocs.onrender.com/upload'; // URL do backend
 
 // Função para exibir mensagens de status
 function displayStatus(message) {
@@ -51,7 +50,7 @@ function createDownloadButton(downloadLink, fileName) {
 
     // Cria o botão de download
     const downloadButton = document.createElement('a');
-    downloadButton.href = downloadLink;
+    downloadButton.href = `https://conversorgroupdocs.onrender.com${downloadLink}`;
     downloadButton.download = fileName;
     downloadButton.textContent = 'Baixar arquivo convertido';
     downloadButton.style.display = 'inline-block';
