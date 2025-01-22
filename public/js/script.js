@@ -1,7 +1,8 @@
 const resultDiv = document.getElementById('result');
 const convertBtn = document.getElementById('convertBtn');
 const fileInput = document.getElementById('file-input');
-const API_URL = 'http://localhost:3000/upload'; // URL do backend
+const API_URL = 'https://conversorgroupdocs.onrender.com/upload';
+
 
 // Função para exibir mensagens de status
 function displayStatus(message) {
