@@ -9,16 +9,22 @@ const cors = require('cors');
 const app = express();
 
 // Configurações do CORS
-app.use(cors());
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST'],
+    exposedHeaders: ['Content-Disposition']
+}));
+
+// Criar pasta uploads se não existir
+const uploadsDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadsDir)){
+    fs.mkdirSync(uploadsDir, { recursive: true });
+}
 
 // Configurações do Multer
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        const uploadDir = 'uploads';
-        if (!fs.existsSync(uploadDir)) {
-            fs.mkdirSync(uploadDir);
-        }
-        cb(null, uploadDir);
+        cb(null, 'uploads');
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + '-' + file.originalname);
@@ -39,12 +45,33 @@ if (!apiKey || !apiSid) {
 const configuration = new GroupDocsConversion.Configuration(apiKey, apiSid);
 const conversionApi = new GroupDocsConversion.ConvertApi(configuration);
 
-// Servir arquivos estáticos da pasta uploads
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// Rota para download de arquivos
+app.get('/uploads/:filename', async (req, res) => {
+    try {
+        const filePath = path.join(__dirname, 'uploads', req.params.filename);
+        
+        if (!fs.existsSync(filePath)) {
+            return res.status(404).json({
+                success: false,
+                message: 'Arquivo não encontrado'
+            });
+        }
+
+        res.setHeader('Content-Disposition', `attachment; filename=${req.params.filename}`);
+        res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+        
+        const fileStream = fs.createReadStream(filePath);
+        fileStream.pipe(res);
+    } catch (error) {
+        console.error('Erro ao enviar arquivo:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Erro ao baixar arquivo'
+        });
+    }
+});
 
 app.post('/upload', upload.single('file'), async (req, res) => {
-    console.log('Recebido upload de arquivo:', req.file);
-
     if (!req.file) {
         return res.status(400).json({
             success: false,
@@ -57,39 +84,25 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     const outputPath = path.join('uploads', outputFileName);
 
     try {
-        console.log('Iniciando upload para GroupDocs...');
-        // Upload do arquivo para o GroupDocs
         const fileApi = new GroupDocsConversion.FileApi(configuration);
         const fileStream = fs.readFileSync(inputPath);
         await fileApi.uploadFile(new GroupDocsConversion.UploadFileRequest(req.file.originalname, fileStream));
-        console.log('Upload concluído.');
 
-        // Configuração da conversão
         const settings = {
             filePath: req.file.originalname,
             format: 'docx',
             outputPath: outputFileName
         };
 
-        console.log('Iniciando conversão de documento...');
-        // Converter o documento
         await conversionApi.convertDocument(new GroupDocsConversion.ConvertDocumentRequest(settings));
-        console.log('Conversão concluída.');
 
-        // Download do arquivo convertido
-        console.log('Iniciando download do arquivo convertido...');
         const downloadedFile = await fileApi.downloadFile(
             new GroupDocsConversion.DownloadFileRequest(settings.outputPath)
         );
 
-        // Salvar o arquivo convertido
         fs.writeFileSync(outputPath, downloadedFile);
-        console.log('Arquivo convertido salvo com sucesso.');
-
-        // Remover arquivo original após a conversão
         fs.unlinkSync(inputPath);
 
-        // Enviar resposta com o link para download
         res.json({
             success: true,
             message: 'Arquivo convertido com sucesso!',
@@ -99,7 +112,6 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     } catch (error) {
         console.error('Erro durante a conversão:', error);
 
-        // Limpar arquivos em caso de erro
         if (fs.existsSync(inputPath)) {
             fs.unlinkSync(inputPath);
         }
@@ -116,5 +128,5 @@ app.post('/upload', upload.single('file'), async (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Servidor rodando em http://localhost:${PORT}`);
+    console.log(`Servidor rodando na porta ${PORT}`);
 });
