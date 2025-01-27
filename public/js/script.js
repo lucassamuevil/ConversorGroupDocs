@@ -3,15 +3,13 @@ const convertBtn = document.getElementById('Button');
 const fileInput = document.getElementById('file-input');
 const API_URL = 'https://conversorgroupdocs.onrender.com'; 
 
-function displayStatus(message) { 
+function displayStatus(message) {
     const messageDiv = document.createElement('div');
     messageDiv.textContent = message;
     messageDiv.style.padding = '10px';
     messageDiv.style.margin = '10px 0';
-    messageDiv.style.backgroundColor = '#7CFC00';
-    messageDiv.style.borderRadius = '80px';
-    messageDiv.style.display = 'inline-block'; // Isso ajuda a controlar a largura
-    messageDiv.style.maxWidth = '90%'; // Ajusta a largura máxima, se necessário
+    messageDiv.style.backgroundColor = '#e3f2fd';
+    messageDiv.style.borderRadius = '4px';
     resultDiv.innerHTML = '';
     resultDiv.appendChild(messageDiv);
 }
@@ -21,11 +19,9 @@ function displayError(message) {
     errorDiv.textContent = message;
     errorDiv.style.padding = '10px';
     errorDiv.style.margin = '10px 0';
-    errorDiv.style.backgroundColor = '#FF0000';
+    errorDiv.style.backgroundColor = '#ffebee';
     errorDiv.style.color = '#c62828';
-    errorDiv.style.borderRadius = '80px';
-    errorDiv.style.display = 'inline-block'; // Isso ajuda a controlar a largura
-    errorDiv.style.maxWidth = '90%'; // Ajusta a largura máxima, se necessário
+    errorDiv.style.borderRadius = '4px';
     resultDiv.innerHTML = '';
     resultDiv.appendChild(errorDiv);
 }
@@ -38,13 +34,13 @@ async function createDownloadButton(downloadLink, fileName) {
     container.style.textAlign = 'center';
     
     const successMessage = document.createElement('p');
-    successMessage.textContent = 'Seu arquivo foi convertido com sucesso! Clique abaixo para fazer o download.';
+    successMessage.textContent = 'Arquivo convertido com sucesso!';
     successMessage.style.color = '#2e7d32';
     successMessage.style.marginBottom = '10px';
     container.appendChild(successMessage);
     
     const downloadButton = document.createElement('button');
-    downloadButton.textContent = 'Clique aqui para baixar seu arquivo convertido';
+    downloadButton.textContent = 'Baixar arquivo convertido';
     downloadButton.style.backgroundColor = '#4CAF50';
     downloadButton.style.color = 'white';
     downloadButton.style.padding = '10px 20px';
@@ -67,7 +63,7 @@ async function createDownloadButton(downloadLink, fileName) {
             window.URL.revokeObjectURL(url);
             a.remove();
         } catch (error) {
-            displayError('Houve um probleminha ao tentar baixar o arquivo. Por favor, tente novamente mais tarde.');
+            displayError('Erro ao baixar o arquivo convertido');
             console.error('Erro no download:', error);
         }
     };
@@ -83,11 +79,11 @@ async function createDownloadButton(downloadLink, fileName) {
 async function handleFormSubmit() {
     const file = fileInput.files[0];
     if (!file) {
-        displayError('Ops! Parece que você ainda não selecionou um arquivo. Por favor, escolha um arquivo para continuar.');
+        displayError('Por favor, selecione um arquivo.');
         return;
     }
 
-    displayStatus('Estamos processando seu arquivo, isso pode levar alguns segundos. Por favor, aguarde...');
+    displayStatus('Convertendo arquivo, por favor aguarde...');
 
     const formData = new FormData();
     formData.append('file', file);
@@ -111,7 +107,7 @@ async function handleFormSubmit() {
             throw new Error(result.message || 'Erro ao converter arquivo');
         }
     } catch (error) {
-        displayError(error.message || 'Desculpe, houve um erro ao processar seu arquivo. Por favor, tente novamente ou entre em contato para mais ajuda.');
+        displayError(error.message || 'Erro ao processar o arquivo. Tente novamente.');
     }
 }
 
@@ -123,29 +119,10 @@ convertBtn.addEventListener('click', (event) => {
 fileInput.addEventListener('change', () => {
     const file = fileInput.files[0];
     if (file) {
-        displayStatus(`Você selecionou o arquivo: ${file.name}. Agora, vamos convertê-lo para você.`);
+        displayStatus(`Arquivo selecionado: ${file.name}`);
     }
 });
 
-var ad1 = document.getElementById('banner-ad');
-var ad2 = document.getElementById('banner-ad2');
-
-// Função para alternar os banners
-function toggleBanners() {
-    if (ad1.style.display === "none") {
-        ad1.style.display = "block";
-        ad2.style.display = "none";
-    } else {
-        ad1.style.display = "none";
-        ad2.style.display = "block";
-    }
-}
-
-// Trocar os banners automaticamente a cada 5 segundos
-setInterval(toggleBanners, 5000);
-
-// Remova a linha abaixo, pois ela já está declarada no começo do seu script
-// const fileInput = document.getElementById('file-input'); 
 
 const fileUploadDrag = document.getElementById('file-upload-drag');
 
@@ -167,7 +144,7 @@ fileUploadDrag.addEventListener('drop', (event) => {
     const file = event.dataTransfer.files[0];
     if (file) {
         fileInput.files = event.dataTransfer.files; // Já existe a variável 'fileInput'
-        displayStatus(`Você selecionou o arquivo: ${file.name}. Agora, vamos convertê-lo para você.`);
+        displayStatus(`Arquivo selecionado: ${file.name}`);
     }
 });
 
@@ -175,6 +152,7 @@ fileUploadDrag.addEventListener('drop', (event) => {
 fileUploadDrag.addEventListener('click', () => {
     fileInput.click();
 });
+
 
 const chooseFileBtn = document.getElementById('choose-file-btn'); // O botão "Escolher arquivo"
 
@@ -200,11 +178,10 @@ fileUploadDrag.addEventListener('drop', (event) => {
     const file = event.dataTransfer.files[0];
     if (file) {
         fileInput.files = event.dataTransfer.files;
-        displayStatus(`Você selecionou o arquivo: ${file.name}. Agora, vamos convertê-lo para você.`);
+        displayStatus(`Arquivo selecionado: ${file.name}`);
     }
 });
 
 fileUploadDrag.addEventListener('click', () => {
     fileInput.click();
 });
-
