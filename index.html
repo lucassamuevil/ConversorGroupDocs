@@ -3,33 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conversor de Documentos</title>
+    <title>ConvertPDF</title>
+    
+    <!-- Responsive CSS Links -->
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+   
 </head>
 <body>
     <header>
-        <h1>Conversor de Documentos</h1>
+        <a href="https://convertpdf.site/">
+            <img src="images/logo png.png" alt="Logo do Conversor" class="logo">
+        </a>
     </header>
 
-    <main>
-        <section>
-            <form onsubmit="return false;" aria-label="Conversor de documentos">
-                <label for="file-input">Selecione um arquivo:</label>
-                <input 
-                    type="file" 
-                    id="file-input" 
-                    name="file" 
-                    accept=".docx,.pdf,.txt,.pptx,.xlsx" 
-                    required 
-                    aria-required="true" 
-                />
-                <button type="button" id="convertBtn">Converter</button>
-            </form>
+    <div class="layout">
+        <main class="content">
+            <section>
+                
+                <div class="carousel-container">
+                    <div class="carousel">
+                        <div><a href="https://amzn.to/3PNPawm" target="_blank"><img src="images/slide 1.jpg" alt="Image 1"></a></div>
+                        <div><a href="https://amzn.to/3E8G7DT" target="_blank"><img src="images/slide 2.png" alt="Image 2"></a></div>
+                        <div><a href="https://amzn.to/42rXkSy" target="_blank"><img src="images/slide 3.jpg" alt="Image 3"></a></div>
+                        <div><a href="https://amzn.to/4jA847N" target="_blank"><img src="images/slide 4.jpg" alt="Image 4"></a></div>
+                        <div><a href="https://amzn.to/3EdYyHi" target="_blank"><img src="images/slide 5.jpg" alt="Image 5"></a></div>
+                        <div><a href="https://amzn.to/4ha7EDd" target="_blank"><img src="images/slide 6.jpg" alt="Image 6"></a></div>
+                    </div>
+                </div>
+            </section>
+            
+      <!-- Substitua a parte do input de arquivo no seu formulário -->
+      <section>
+        <form>
+            <div class="button-container">
+    
+                <!-- Campo de arraste para escolher o arquivo -->
+                <div class="file-upload-drag" id="file-upload-drag">
+                    <button type="button" id="btn-choose-file">
+                        <img src="images/ficheiro-pdf.png" alt="Ícone" style="width: 30px; height: 30px; margin-right: 8px;">
+                        <span>Selecione seu arquivo PDF</span>
+                    </button>
+                    <input type="file" id="file-input" name="file" accept=".pdf" required style="display: none;">
+                </div>
+                <p id="p" >Arraste seu arquivo para cá ou clique no botão para selecionar</p>
+                <button type="button" id="Button">Converta Agora</button>
+                <button type="button" id="returnBtn" style="display: none;" onclick="window.location.reload();">Começar nova conversão</button>
+            </div>
+        </form>
+        <div id="result"></div>
+    </section>
+    
+    <!-- Seção de Vantagens -->
+    <div class="grid-container">
+        <div class="grid-item">
+            <img src="images/foguete.png" >
+            <p><strong>Rápido e Simples:</strong> Converta seus arquivos PDF rapidamente e sem registro necessário.</p>
+        </div>
+        <div class="grid-item">
+            <img src="images/terra.png" >
+            <p><strong>Compatibilidade Total:</strong> Nossa ferramenta funciona em Mac, Windows e todos os dispositivos populares.</p>
+        </div>
+        <div class="grid-item">
+            <img src="images/arraste-para-cima.png" >
+            <p><strong>Simplicidade na Conversão:</strong> Arraste e solte seus arquivos, transformando documentos e imagens em PDF facilmente.</p>
+        </div>
+        <div class="grid-item">
+            <img src="images/cadeado-trancado.png" >
+            <p><strong>Segurança Garantida:</strong> Suas transferências de arquivos são protegidas por criptografia SSL avançada e deletadas após a conversão.</p>
+        </div>
+        <div class="grid-item">
+            <img src="images/conectados.png" >
+            <p><strong>Sem Instalação Necessária:</strong> Converter PDF diretamente no navegador de sua escolha, sem downloads.</p>
+        </div>
+        <div class="grid-item">
+            <img src="images/trofeu.png" >
+            <p><strong>Qualidade Garantida:</strong> Parceria com Solid Documents para garantir a melhor qualidade nas conversões.</p>
+        </div>
+    </div>
+    
+    
+    <footer>
+        <p>&copy; 2025 - ConvertPDF. Todos os direitos reservados. Distribuído sob licença MIT.</p>
+        <p>Siga-nos: 
+            <a href="https://instagram.com" target="_blank">Instagram</a> | 
+            <a href="https://facebook.com" target="_blank">Facebook</a>
+        </p>
+    </footer>
 
-            <div id="result" aria-live="polite" role="status"></div>
-        </section>
-    </main>
-
+    <!-- Scripts -->
     <script src="public/js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.carousel').slick({
+                dots: true,
+                infinite: true,
+                speed: 300,
+                slidesToShow: 1,
+                adaptiveHeight: true,
+                autoplay: true,
+                autoplaySpeed: 3000,
+                responsive: [
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            arrows: false
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
 </body>
 </html>
+

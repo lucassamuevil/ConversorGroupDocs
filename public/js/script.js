@@ -1,15 +1,17 @@
 const resultDiv = document.getElementById('result');
-const convertBtn = document.getElementById('convertBtn');
+const convertBtn = document.getElementById('Button');
 const fileInput = document.getElementById('file-input');
 const API_URL = 'https://conversorgroupdocs.onrender.com'; 
 
-function displayStatus(message) {
+function displayStatus(message) { 
     const messageDiv = document.createElement('div');
     messageDiv.textContent = message;
     messageDiv.style.padding = '10px';
     messageDiv.style.margin = '10px 0';
-    messageDiv.style.backgroundColor = '#e3f2fd';
-    messageDiv.style.borderRadius = '4px';
+    messageDiv.style.backgroundColor = '#7CFC00';
+    messageDiv.style.borderRadius = '80px';
+    messageDiv.style.display = 'inline-block'; // Isso ajuda a controlar a largura
+    messageDiv.style.maxWidth = '90%'; // Ajusta a largura máxima, se necessário
     resultDiv.innerHTML = '';
     resultDiv.appendChild(messageDiv);
 }
@@ -19,12 +21,15 @@ function displayError(message) {
     errorDiv.textContent = message;
     errorDiv.style.padding = '10px';
     errorDiv.style.margin = '10px 0';
-    errorDiv.style.backgroundColor = '#ffebee';
+    errorDiv.style.backgroundColor = '#FF0000';
     errorDiv.style.color = '#c62828';
-    errorDiv.style.borderRadius = '4px';
+    errorDiv.style.borderRadius = '80px';
+    errorDiv.style.display = 'inline-block'; // Isso ajuda a controlar a largura
+    errorDiv.style.maxWidth = '90%'; // Ajusta a largura máxima, se necessário
     resultDiv.innerHTML = '';
     resultDiv.appendChild(errorDiv);
 }
+
 
 async function createDownloadButton(downloadLink, fileName) {
     resultDiv.innerHTML = '';
@@ -33,13 +38,13 @@ async function createDownloadButton(downloadLink, fileName) {
     container.style.textAlign = 'center';
     
     const successMessage = document.createElement('p');
-    successMessage.textContent = 'Arquivo convertido com sucesso!';
+    successMessage.textContent = 'Seu arquivo foi convertido com sucesso! Clique abaixo para fazer o download.';
     successMessage.style.color = '#2e7d32';
     successMessage.style.marginBottom = '10px';
     container.appendChild(successMessage);
     
     const downloadButton = document.createElement('button');
-    downloadButton.textContent = 'Baixar arquivo convertido';
+    downloadButton.textContent = 'Clique aqui para baixar seu arquivo convertido';
     downloadButton.style.backgroundColor = '#4CAF50';
     downloadButton.style.color = 'white';
     downloadButton.style.padding = '10px 20px';
@@ -62,23 +67,27 @@ async function createDownloadButton(downloadLink, fileName) {
             window.URL.revokeObjectURL(url);
             a.remove();
         } catch (error) {
-            displayError('Erro ao baixar o arquivo convertido');
+            displayError('Houve um probleminha ao tentar baixar o arquivo. Por favor, tente novamente mais tarde.');
             console.error('Erro no download:', error);
         }
     };
     
     container.appendChild(downloadButton);
+
+    const returnBtn = document.getElementById('returnBtn');
+    returnBtn.style.display = 'inline-block';
+
     resultDiv.appendChild(container);
 }
 
 async function handleFormSubmit() {
     const file = fileInput.files[0];
     if (!file) {
-        displayError('Por favor, selecione um arquivo.');
+        displayError('Ops! Parece que você ainda não selecionou um arquivo. Por favor, escolha um arquivo para continuar.');
         return;
     }
 
-    displayStatus('Convertendo arquivo, por favor aguarde...');
+    displayStatus('Estamos processando seu arquivo, isso pode levar alguns segundos. Por favor, aguarde...');
 
     const formData = new FormData();
     formData.append('file', file);
@@ -102,7 +111,7 @@ async function handleFormSubmit() {
             throw new Error(result.message || 'Erro ao converter arquivo');
         }
     } catch (error) {
-        displayError(error.message || 'Erro ao processar o arquivo. Tente novamente.');
+        displayError(error.message || 'Desculpe, houve um erro ao processar seu arquivo. Por favor, tente novamente ou entre em contato para mais ajuda.');
     }
 }
 
@@ -114,6 +123,88 @@ convertBtn.addEventListener('click', (event) => {
 fileInput.addEventListener('change', () => {
     const file = fileInput.files[0];
     if (file) {
-        displayStatus(`Arquivo selecionado: ${file.name}`);
+        displayStatus(`Você selecionou o arquivo: ${file.name}. Agora, vamos convertê-lo para você.`);
     }
 });
+
+var ad1 = document.getElementById('banner-ad');
+var ad2 = document.getElementById('banner-ad2');
+
+// Função para alternar os banners
+function toggleBanners() {
+    if (ad1.style.display === "none") {
+        ad1.style.display = "block";
+        ad2.style.display = "none";
+    } else {
+        ad1.style.display = "none";
+        ad2.style.display = "block";
+    }
+}
+
+// Trocar os banners automaticamente a cada 5 segundos
+setInterval(toggleBanners, 5000);
+
+// Remova a linha abaixo, pois ela já está declarada no começo do seu script
+// const fileInput = document.getElementById('file-input'); 
+
+const fileUploadDrag = document.getElementById('file-upload-drag');
+
+// Função para mudar o estilo quando o arquivo é arrastado para a área
+fileUploadDrag.addEventListener('dragover', (event) => {
+    event.preventDefault();
+    fileUploadDrag.classList.add('drag-over');
+});
+
+fileUploadDrag.addEventListener('dragleave', () => {
+    fileUploadDrag.classList.remove('drag-over');
+});
+
+// Função para capturar o arquivo quando for solto na área de arraste
+fileUploadDrag.addEventListener('drop', (event) => {
+    event.preventDefault();
+    fileUploadDrag.classList.remove('drag-over');
+    
+    const file = event.dataTransfer.files[0];
+    if (file) {
+        fileInput.files = event.dataTransfer.files; // Já existe a variável 'fileInput'
+        displayStatus(`Você selecionou o arquivo: ${file.name}. Agora, vamos convertê-lo para você.`);
+    }
+});
+
+// Permitir que a área de arraste seja clicada para abrir o explorador de arquivos
+fileUploadDrag.addEventListener('click', () => {
+    fileInput.click();
+});
+
+const chooseFileBtn = document.getElementById('choose-file-btn'); // O botão "Escolher arquivo"
+
+// Permitir que o botão "Escolher arquivo" abra o seletor de arquivos
+chooseFileBtn.addEventListener('click', () => {
+    fileInput.click(); // Aciona a ação do input de arquivos
+});
+
+// O restante do código de manipulação de arquivos permanece igual
+fileUploadDrag.addEventListener('dragover', (event) => {
+    event.preventDefault();
+    fileUploadDrag.classList.add('drag-over');
+});
+
+fileUploadDrag.addEventListener('dragleave', () => {
+    fileUploadDrag.classList.remove('drag-over');
+});
+
+fileUploadDrag.addEventListener('drop', (event) => {
+    event.preventDefault();
+    fileUploadDrag.classList.remove('drag-over');
+    
+    const file = event.dataTransfer.files[0];
+    if (file) {
+        fileInput.files = event.dataTransfer.files;
+        displayStatus(`Você selecionou o arquivo: ${file.name}. Agora, vamos convertê-lo para você.`);
+    }
+});
+
+fileUploadDrag.addEventListener('click', () => {
+    fileInput.click();
+});
+
