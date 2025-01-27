@@ -16,53 +16,50 @@ body {
   background-color: #f4f4f4;
   color: #333;
   line-height: 1.6;
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 80px;
 }
 
+/* Header fixo */
 header {
   background-color: #05011f;
-  height: 80px;  /* Tamanho fixo */
-  padding: 10px;
+  height: 8vh; /* Mudança para viewport height */
+  padding: 0vh;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 200%;
   z-index: 1000;
 }
 
+/* Logo com tamanho fixo */
 header .logo {
-  width: 10vw;  /* Tamanho relativo à largura da janela */
-  height: auto;
-  max-width: 340px;  /* Tamanho máximo para não ultrapassar o limite desejado */
-  margin-top: 20px;
-  position: relative; /* Permite ajustar com left/right */
-  left: -1vh;
+  height: 40vh;
+  width: auto;
+  margin-left: -1vw;
+  object-fit: contain;
+  margin-top: 2vh;
+  
 }
 
 /* Layout principal */
 .layout {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; /* Centraliza os elementos */
-  margin: 80px 20px 100px 20px; /* Ajuste de margem para acomodar header fixo e footer fixo */
+  justify-content: center;
+  margin: 100px 20px 0 20px;
   gap: 20px;
-}
-
-/* Ajustes para a logo manter o tamanho fixo */
-@media (max-width: 768px) {
-  header .logo {
-    width: 150px;  /* Largura fixa para telas menores */
-    max-width: 100%;  /* Para que a logo nunca ultrapasse a largura da tela */
-  }
+  min-height: calc(100vh - 80px);
 }
 
 /* Conteúdo principal */
 .content {
   background: #fff;
   padding: 20px;
- 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   flex: 1;
   max-width: 70%;
@@ -72,7 +69,7 @@ header .logo {
 /* Carrossel */
 .carousel-container {
   margin-bottom: 30px;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .carousel {
@@ -83,15 +80,13 @@ header .logo {
 .carousel img {
   width: 150%;
   height: auto;
-
 }
 
 /* Botões e upload de arquivo */
 .button-wrapper {
   display: flex;
-  justify-content: center; /* Centraliza os botões horizontalmente */
+  justify-content: center;
   margin-top: 20px;
-  
 }
 
 /* Estilo do container de botões com retângulo azul */
@@ -100,16 +95,15 @@ header .logo {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;  /* Espaço entre os botões */
+  gap: 20px;
   height: 350px;
-  background-color: #05011f;  /* Cor de fundo azul */
+  background-color: #05011f;
   padding: 20px;
-  flex-direction: column;  /* Organiza os itens em coluna */
+  flex-direction: column;
   margin-top: 20px;
   margin-left: 0px;
   margin-right: 0px;
 }
-
 
 /* Estilo da área de arraste de arquivos */
 .file-upload-custom {
@@ -119,19 +113,19 @@ header .logo {
   max-width: 250px;
   margin-top: 20px;
   padding: 20px;
-  background-color: #e9ecef; /* Cor de fundo da área de arraste */
-  border: 2px dashed #6c757d; /* Bordas tracejadas */
+  background-color: #e9ecef;
+  border: 2px dashed #6c757d;
   border-radius: 8px;
   text-align: center;
   cursor: pointer;
 }
 
 .file-upload-custom:hover {
-  background-color: #f8f9fa; /* Mudança na cor de fundo ao passar o mouse */
+  background-color: #f8f9fa;
 }
 
 .file-upload-custom input[type="file"] {
-  display: none; /* Esconde o campo de input */
+  display: none;
 }
 
 .file-upload-custom label {
@@ -141,14 +135,14 @@ header .logo {
 }
 
 .file-upload-custom label:hover {
-  text-decoration: underline; /* Sublinha o texto quando passar o mouse */
+  text-decoration: underline;
 }
 
 /* Estilo para a área de arraste */
 .file-upload-drag {
   width: 100%;
   height: 200px;
-  border:#000000;
+  border: #000000;
   border-radius: 8px;
   display: flex;
   justify-content: center;
@@ -163,55 +157,41 @@ header .logo {
   background-color: #d0e7f8;
 }
 
-/* Estilo para texto dentro da área de arraste */
 .file-upload-drag p {
   font-size: 16px;
   margin: 0;
 }
 
-/* Estilo quando o arquivo está sendo arrastado para a área */
 .file-upload-drag.drag-over {
   border-color: #2196F3;
   background-color: #f0f8ff;
 }
 
+/* Estilo do botão de escolher arquivo */
 #btn-choose-file {
-  background-color: #FFD700; /* Cor de fundo */
-  color: #000000; /* Cor do texto */
-  padding: 5px 10px; /* Espaçamento interno */
-  border: 2px solid transparent; /* Borda transparente por padrão */
-  border-radius: 8px; /* Bordas arredondadas */
-  cursor: pointer; /* Mostrar o cursor de mão ao passar sobre o botão */
-  font-size: 16px; /* Tamanho da fonte */
-  
-  display: flex; /* Permite usar flexbox */
-  align-items: center; /* Alinha o conteúdo verticalmente */
-  justify-content: center; /* Alinha o conteúdo horizontalmente */
-  
-  width: 100%; /* O botão ocupa toda a largura disponível */
-  max-width: 200px; /* Limite de largura para não ficar excessivamente largo em telas grandes */
-  box-sizing: border-box; /* Inclui o padding e a borda no cálculo do tamanho total do botão */
-  
-  transition: all 0.3s ease; /* Transição suave para a borda e o fundo */
+  background-color: #FFD700;
+  color: #000000;
+  padding: 5px 10px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 200px;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
 }
 
 #btn-choose-file:hover {
-  background-color: #e0a800; /* Cor do botão ao passar o mouse */
-  border-color: #FFD700; /* Cor da borda ao passar o mouse */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave para dar profundidade */
+  background-color: #e0a800;
+  border-color: #FFD700;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Ajustes para dispositivos móveis */
-@media (max-width: 768px) {
-  #btn-choose-file {
-    font-size: 14px; /* Reduz o tamanho da fonte para telas menores */
-    padding: 12px 20px; /* Ajusta o padding para melhorar a área de toque */
-  }
-}
-
-
-
-/* Estilo da área de arraste */
+/* Estilo da área de upload */
 .file-upload-area {
   border: 2px dashed #ccc;
   padding: 30px;
@@ -219,53 +199,39 @@ header .logo {
   margin-top: 10px;
 }
 
-/* Quando o arquivo é arrastado para a área */
 .file-upload-area.drag-over {
   border-color: #4CAF50;
   background-color: #f1f8f6;
 }
 
-
-
+/* Estilos dos botões */
 button {
   padding: 10px 20px;
   cursor: pointer;
   border: none;
   border-radius: 5px;
   transition: background-color 0.3s ease;
-  width: 100%; /* Ajuste de largura para responsividade */
-  max-width: 250px; /* Tamanho máximo para corresponsividade */
+  width: 100%;
+  max-width: 250px;
 }
 
 #Button {
   background-color: #ffc107;
   color: black;
 }
-#p {
-  color: #fff; /* Cor do texto */
-  
-  /* Centralização do parágrafo */
-  display: flex; /* Usa flexbox */
-  justify-content: center; /* Centraliza horizontalmente */
-  align-items: center; /* Centraliza verticalmente */
-  text-align: center; /* Garante que o texto também fique centralizado dentro do parágrafo */
-  
-  width: 100%; /* O parágrafo ocupa 100% da largura disponível */
-  max-width: 600px; /* Limita a largura máxima para não ficar excessivamente largo */
-  margin: 0 auto; /* Centraliza o parágrafo em relação ao seu contêiner */
-  
-  font-size: 16px; /* Tamanho de fonte padrão */
-  padding: 10px; /* Espaçamento interno */
-  
-  box-sizing: border-box; /* Inclui padding e borda no cálculo da largura */
-}
 
-/* Ajustes para telas pequenas */
-@media (max-width: 768px) {
-  #p {
-    font-size: 14px; /* Reduz o tamanho da fonte para telas menores */
-    padding: 8px; /* Ajusta o padding para melhorar a leitura */
-  }
+#p {
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 16px;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 #Button:hover {
@@ -286,20 +252,18 @@ button {
   text-align: center;
 }
 
-/* Rodapé */
+/* Footer modificado */
 footer {
   background-color: #05011f;
   color: #fff;
   text-align: center;
-  padding: 20px;
-  position: fixed;
+  padding: vh;
+  height: 8vh; /* Mudança para viewport height */
+  width: 100%;
+  position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
-  height: 80px;  /* Tamanho fixo */
-  z-index: 1000;
 }
-
 
 footer a {
   color: #fff;
@@ -313,81 +277,16 @@ footer a:hover {
   color: #f0f0f0;
 }
 
-/* Media Queries para responsividade */
-@media (max-width: 1024px) {
-  .layout {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .content {
-    max-width: 100%;
-    margin: 10px;
-    margin-bottom: 30px; /* Ajuste de margem inferior */
-  }
-}
-
-@media (max-width: 768px) {
-  header .logo {
-    max-width: 120px;
-  }
-
-  .button-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .file-upload-custom {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .file-upload-custom label,
-  button {
-    width: 100%;
-    text-align: center;
-    margin-top: 10px;
-  }
-
-  .carousel img {
-    max-height: 200px;
-    object-fit: cover;
-  }
-}
-
-@media (max-width: 480px) {
-  header,
-  footer {
-    padding: 10px;
-  }
-
-  .file-upload-custom label {
-    padding: 12px;
-    font-size: 14px; /* Ajuste de tamanho de fonte para dispositivos menores */
-  }
-
-  button {
-    padding: 12px;
-    font-size: 14px; /* Ajuste de tamanho de fonte para dispositivos menores */
-  }
-}
-
+/* Grid Container */
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Para telas grandes, duas colunas lado a lado */
-  grid-gap: 20px; /* Espaço entre os itens */
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
   padding: 20px;
   margin-bottom: 40px;
-  justify-items: center; /* Centralizar os itens */
-  align-content: center; /* Centralizar os itens verticalmente */
-  row-gap: 100px; /* Aumenta o espaço entre as linhas */
-}
-
-/* Media query para telas pequenas */
-@media (max-width: 768px) {
-  .grid-container {
-    grid-template-columns: 1fr; /* Para telas pequenas, uma coluna por linha */
-  }
+  justify-items: center;
+  align-content: center;
+  row-gap: 100px;
 }
 
 .grid-item {
@@ -414,27 +313,23 @@ footer a:hover {
   max-width: 30ch;
 }
 
-
-
-/* Estilo da imagem no banner */
+/* Banner e botão de compra */
 .banner img {
-  width: 15%; /* Mantém a imagem responsiva */
-  max-width: 1200px; /* Ajuste o tamanho máximo da imagem */
-  height: auto; /* Mantém a proporção */
-  object-fit: cover; /* A imagem ocupa toda a largura e altura sem distorcer */
-  display: block; /* Garante que a imagem se comporte corretamente */
-  margin: 0 auto; /* Centraliza a imagem */
+  width: 15%;
+  max-width: 1200px;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
   margin-left: 20px;
   margin-bottom: 1px;
 }
 
-/* Centraliza o botão abaixo do banner */
 .banner .buy-button-wrapper {
-  text-align: center; /* Garante que o botão fique centralizado */
-  margin-top: 20px; /* Espaço entre o banner e o botão */
+  text-align: center;
+  margin-top: 20px;
 }
 
-/* Estilo do botão de compra */
 .buy-button {
   background-color: #F5A623;
   color: #000000;
@@ -443,9 +338,96 @@ footer a:hover {
   cursor: pointer;
   border-radius: 80px;
   transition: background-color 0.3s ease;
-  display: inline-block; /* Garante que o botão seja um bloco em linha */
+  display: inline-block;
 }
 
 .buy-button:hover {
   background-color: #FF8C00;
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 1024px) {
+  .layout {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .content {
+    max-width: 100%;
+    margin: 10px;
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  
+  
+  .layout {
+    margin-top: 90px;
+  }
+
+  .button-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .file-upload-custom {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .file-upload-custom label,
+  button {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .carousel img {
+    max-height: 200px;
+    object-fit: cover;
+  }
+
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+
+  #btn-choose-file {
+    font-size: 14px;
+    padding: 12px 20px;
+  }
+
+  #p {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+
+    .logo {
+      max-width: 80%;
+      margin-right: 100px;
+    }
+
+  header {
+    height: 130px;
+    margin-left: 10px;
+  }
+
+  header,
+  footer {
+    padding: 10px;
+  }
+
+  .file-upload-custom label {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  button {
+    padding: 12px;
+    font-size: 14px;
+  }
 }
