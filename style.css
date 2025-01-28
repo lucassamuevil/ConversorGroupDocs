@@ -54,16 +54,18 @@ header .logo {
 /* Conteúdo principal */
 .content {
   background: #fff;
-  padding: 20px;
+  padding: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   flex: 1;
   max-width: 70%;
   margin: 0px;
+ 
 }
 
 /* Carrossel */
 .carousel-container {
   margin: 20px 0 30px 0;
+ 
 }
 
 .carousel {
@@ -74,12 +76,17 @@ header .logo {
 .carousel img {
   width: 100%; /* Corrigido de 150% para 100% */
   height: auto;
+  
 }
 
 .slick-dots {
   display: none !important;
 }
 
+#p {
+  text-align: center; /* Centraliza o texto horizontalmente */
+  margin: 10px 0; /* Ajusta a margem para que não fique muito apertado */
+}
 /* Container de botões */
 .button-container {
   background-color: #05011f;
@@ -104,6 +111,7 @@ header .logo {
   text-align: center;
   cursor: pointer;
   margin-top: 20px;
+  
 }
 
 .file-upload-custom:hover {
@@ -132,6 +140,7 @@ header .logo {
   color: #4CAF50;
   cursor: pointer;
 }
+
 
 .file-upload-drag:hover,
 .file-upload-drag.drag-over {
@@ -192,10 +201,11 @@ button {
   grid-template-columns: repeat(2, 1fr);
   gap: 30px;
   padding: 20px;
-  margin-bottom: 500px;
+  margin-bottom: 350px;
   justify-items: center;
   align-content: center;
   row-gap: 160px;
+  margin-top: 80px;
 }
 
 .grid-item {
@@ -224,18 +234,19 @@ footer {
   background-color: #05011f;
   color: #fff;
   text-align: center;
-  height: 33vh;
   width: 100%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  position: absolute;   /* Faz o footer aparecer somente quando o conteúdo rolar até o fim */
+  bottom: 0;            /* Posiciona o footer no final da página */
+  left: 0;              /* Alinha o footer à esquerda */
   padding: 20px 0;
+  z-index: 10;          /* Garante que o footer fique sobre outros elementos */
 }
 
 footer p {
   margin: 13px 0;
   font-size: clamp(0.9rem, 2vw, 1.1rem);
   line-height: 1.6;
+  margin-top: 50px;
 }
 
 footer a {
@@ -251,6 +262,7 @@ footer .social-links {
   justify-content: center;
   gap: 15px;
 }
+
 
 /* Media Queries */
 @media screen and (max-width: 1024px) {
