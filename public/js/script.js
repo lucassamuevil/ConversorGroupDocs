@@ -9,6 +9,7 @@ function displayStatus(message) {
     messageDiv.style.padding = '10px';
     messageDiv.style.margin = '10px 0';
     messageDiv.style.backgroundColor = '#e3f2fd';
+    messageDiv.style.textAlign = 'center';  
     messageDiv.style.borderRadius = '4px';
     resultDiv.innerHTML = '';
     resultDiv.appendChild(messageDiv);
@@ -17,6 +18,7 @@ function displayStatus(message) {
 function displayError(message) {
     const errorDiv = document.createElement('div');
     errorDiv.textContent = message;
+    errorDiv.style.textAlign = 'center';  
     errorDiv.style.padding = '10px';
     errorDiv.style.margin = '10px 0';
     errorDiv.style.backgroundColor = '#ffebee';
@@ -25,7 +27,6 @@ function displayError(message) {
     resultDiv.innerHTML = '';
     resultDiv.appendChild(errorDiv);
 }
-
 
 async function createDownloadButton(downloadLink, fileName) {
     resultDiv.innerHTML = '';
@@ -83,6 +84,12 @@ async function handleFormSubmit() {
         return;
     }
 
+    // Disable button and change text
+    convertBtn.disabled = true;
+    convertBtn.textContent = 'Convertendo...';
+    convertBtn.style.backgroundColor = '#cccccc';
+    convertBtn.style.cursor = 'not-allowed';
+
     displayStatus('Convertendo arquivo, por favor aguarde...');
 
     const formData = new FormData();
@@ -108,8 +115,15 @@ async function handleFormSubmit() {
         }
     } catch (error) {
         displayError(error.message || 'Erro ao processar o arquivo. Tente novamente.');
+        // Reset button state on error
+        convertBtn.disabled = false;
+        convertBtn.textContent = 'Converter';
+        convertBtn.style.backgroundColor = '';
+        convertBtn.style.cursor = 'pointer';
     }
 }
+
+// Rest of the event listeners remain the same...
 
 convertBtn.addEventListener('click', (event) => {
     event.preventDefault();

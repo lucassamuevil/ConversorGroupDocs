@@ -1,16 +1,11 @@
-/* Remove "bolinhas" do carrossel */
-.slick-dots {
-  display: none !important;
-}
-
-/* Reset de margin e padding para garantir um layout limpo */
+/* Reset global */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Configurações globais de fonte e corpo */
+/* Configurações globais */
 body {
   font-family: 'Roboto', sans-serif;
   background-color: #f4f4f4;
@@ -21,29 +16,28 @@ body {
   padding-bottom: 80px;
 }
 
-/* Header fixo */
+/* Header */
 header {
   background-color: #05011f;
-  height: 8vh; /* Mudança para viewport height */
-  padding: 0vh;
+  height: 70px;
+  width: 100%;
+  padding: 0 20px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
   position: fixed;
   top: 0;
   left: 0;
-  width: 200%;
   z-index: 1000;
+
 }
 
-/* Logo com tamanho fixo */
 header .logo {
-  height: 40vh;
+  height: 315px;
   width: auto;
-  margin-left: -1vw;
   object-fit: contain;
-  margin-top: 2vh;
-  
+  max-width: 300px;
+  margin-top: 12px;
+  margin-left: -30px;
 }
 
 /* Layout principal */
@@ -51,7 +45,8 @@ header .logo {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 100px 20px 0 20px;
+  margin-top: 80px;
+  padding: 0 20px;
   gap: 20px;
   min-height: calc(100vh - 80px);
 }
@@ -63,13 +58,12 @@ header .logo {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   flex: 1;
   max-width: 70%;
-  margin: 10px;
+  margin: 0px;
 }
 
 /* Carrossel */
 .carousel-container {
-  margin-bottom: 30px;
-  margin-top: 20px;
+  margin: 20px 0 30px 0;
 }
 
 .carousel {
@@ -78,46 +72,38 @@ header .logo {
 }
 
 .carousel img {
-  width: 150%;
+  width: 100%; /* Corrigido de 150% para 100% */
   height: auto;
 }
 
-/* Botões e upload de arquivo */
-.button-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+.slick-dots {
+  display: none !important;
 }
 
-/* Estilo do container de botões com retângulo azul */
+/* Container de botões */
 .button-container {
-  border-radius: 0px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  height: 350px;
   background-color: #05011f;
   padding: 20px;
+  height: 350px;
+  display: flex;
   flex-direction: column;
-  margin-top: 20px;
-  margin-left: 0px;
-  margin-right: 0px;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0;
 }
 
-/* Estilo da área de arraste de arquivos */
+/* Área de upload */
 .file-upload-custom {
-  display: inline-block;
-  position: relative;
   width: 100%;
   max-width: 250px;
-  margin-top: 20px;
   padding: 20px;
   background-color: #e9ecef;
   border: 2px dashed #6c757d;
   border-radius: 8px;
   text-align: center;
   cursor: pointer;
+  margin-top: 20px;
 }
 
 .file-upload-custom:hover {
@@ -134,77 +120,25 @@ header .logo {
   font-weight: bold;
 }
 
-.file-upload-custom label:hover {
-  text-decoration: underline;
-}
-
-/* Estilo para a área de arraste */
+/* Área de arraste */
 .file-upload-drag {
   width: 100%;
   height: 200px;
-  border: #000000;
   border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  cursor: pointer;
   background-color: #e3f2fd;
   color: #4CAF50;
+  cursor: pointer;
 }
 
-.file-upload-drag:hover {
+.file-upload-drag:hover,
+.file-upload-drag.drag-over {
   background-color: #d0e7f8;
 }
 
-.file-upload-drag p {
-  font-size: 16px;
-  margin: 0;
-}
-
-.file-upload-drag.drag-over {
-  border-color: #2196F3;
-  background-color: #f0f8ff;
-}
-
-/* Estilo do botão de escolher arquivo */
-#btn-choose-file {
-  background-color: #FFD700;
-  color: #000000;
-  padding: 5px 10px;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 200px;
-  box-sizing: border-box;
-  transition: all 0.3s ease;
-}
-
-#btn-choose-file:hover {
-  background-color: #e0a800;
-  border-color: #FFD700;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Estilo da área de upload */
-.file-upload-area {
-  border: 2px dashed #ccc;
-  padding: 30px;
-  text-align: center;
-  margin-top: 10px;
-}
-
-.file-upload-area.drag-over {
-  border-color: #4CAF50;
-  background-color: #f1f8f6;
-}
-
-/* Estilos dos botões */
+/* Botões */
 button {
   padding: 10px 20px;
   cursor: pointer;
@@ -220,20 +154,6 @@ button {
   color: black;
 }
 
-#p {
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  font-size: 16px;
-  padding: 10px;
-  box-sizing: border-box;
-}
-
 #Button:hover {
   background-color: #e0a800;
 }
@@ -247,50 +167,38 @@ button {
   background-color: #c82333;
 }
 
-#result {
-  margin-top: 20px;
-  text-align: center;
-}
-
-/* Footer modificado */
-footer {
-  background-color: #05011f;
-  color: #fff;
-  text-align: center;
-  padding: vh;
-  height: 8vh; /* Mudança para viewport height */
+#btn-choose-file {
+  background-color: #FFD700;
+  color: #000000;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  max-width: 200px;
+  transition: all 0.3s ease;
 }
 
-footer a {
-  color: #fff;
-  text-decoration: none;
-  margin: 0 10px;
-  transition: color 0.3s ease;
-}
-
-footer a:hover {
-  text-decoration: underline;
-  color: #f0f0f0;
+#btn-choose-file:hover {
+  background-color: #e0a800;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Grid Container */
 .grid-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 20px;
+  gap: 30px;
   padding: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 500px;
   justify-items: center;
   align-content: center;
-  row-gap: 100px;
+  row-gap: 160px;
 }
 
 .grid-item {
-  border: none;
   padding: 20px;
   text-align: center;
   display: flex;
@@ -306,47 +214,46 @@ footer a:hover {
 
 .grid-item p {
   margin: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  max-width: 30ch;
   word-break: break-word;
   hyphens: auto;
-  max-width: 30ch;
 }
 
-/* Banner e botão de compra */
-.banner img {
-  width: 15%;
-  max-width: 1200px;
-  height: auto;
-  object-fit: cover;
-  display: block;
-  margin: 0 auto;
-  margin-left: 20px;
-  margin-bottom: 1px;
-}
-
-.banner .buy-button-wrapper {
+/* Footer */
+footer {
+  background-color: #05011f;
+  color: #fff;
   text-align: center;
-  margin-top: 20px;
+  height: 33vh;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 20px 0;
 }
 
-.buy-button {
-  background-color: #F5A623;
-  color: #000000;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  border-radius: 80px;
-  transition: background-color 0.3s ease;
-  display: inline-block;
+footer p {
+  margin: 13px 0;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  line-height: 1.6;
 }
 
-.buy-button:hover {
-  background-color: #FF8C00;
+footer a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 8px;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  transition: color 0.3s ease;
 }
 
-/* Media Queries para responsividade */
-@media (max-width: 1024px) {
+footer .social-links {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* Media Queries */
+@media screen and (max-width: 1024px) {
   .layout {
     flex-direction: column;
     align-items: center;
@@ -354,39 +261,28 @@ footer a:hover {
 
   .content {
     max-width: 100%;
-    margin: 10px;
-    margin-bottom: 30px;
   }
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
+  header {
+    height: 60px;
+    padding: 0 15px;
+   
 
-  
-  
+  }
+
+  header .logo {
+    height: 320px;
+  }
+
   .layout {
-    margin-top: 90px;
+    margin-top: 70px;
   }
 
   .button-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .file-upload-custom {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .file-upload-custom label,
-  button {
-    width: 100%;
-    text-align: center;
-    margin-top: 10px;
-  }
-
-  .carousel img {
-    max-height: 200px;
-    object-fit: cover;
+    height: auto;
+    min-height: 350px;
   }
 
   .grid-container {
@@ -395,39 +291,29 @@ footer a:hover {
 
   #btn-choose-file {
     font-size: 14px;
-    padding: 12px 20px;
   }
 
-  #p {
-    font-size: 14px;
-    padding: 8px;
+  footer .social-links {
+    flex-direction: column;
+    gap: 10px;
   }
 }
 
-@media (max-width: 480px) {
-
-    .logo {
-      max-width: 80%;
-      margin-right: 100px;
-    }
-
+@media screen and (max-width: 480px) {
   header {
-    height: 130px;
-    margin-left: 10px;
+    height: 50px;
+    padding: 0 10px;
+
+    
   }
 
-  header,
-  footer {
-    padding: 10px;
+  header .logo {
+    height: 300px;
+    
   }
 
-  .file-upload-custom label {
-    padding: 12px;
-    font-size: 14px;
-  }
-
-  button {
-    padding: 12px;
-    font-size: 14px;
+  .layout {
+    margin-top: 60px;
+    padding: 0 10px;
   }
 }
